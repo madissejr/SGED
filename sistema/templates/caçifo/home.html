@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Seção Home
+{% endblock title %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap
+    align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+        <h2 class="h4">Caçifos disponiveis</h2>
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{% url 'sistema:registar-caçifo' %}" class="btn btn-sm btn-outline-primary d-inline-flex
+            align-items-center">
+            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path
+                    stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            Novo caçifo
+        </a>
+    </div>
+    </div>
+    <div class="table-settings mb-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="col col-md-6 col-lg-3 col-xl-4">
+                <div class="input-group me-2 me-lg-3 fmxw-400">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-body border-0 shadow table-wrapper
+        table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="border-gray-200">Nome da caçifo</th>
+                    <th class="border-gray-200">Descrição</th>
+                    <th class="border-gray-200">Secção</th>
+                    <th class="border-gray-200">Criado em</th>
+                    <th class="border-gray-200">Atualizado em</th>
+                    <th class="border-gray-200">Registado por</th>
+                    <th class="border-gray-200">Atualizado por</th>
+                    <th class="border-gray-200"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Item -->
+                {% if caçifos %}
+                {% for caçifo in caçifos %}
+                <tr>
+                    <td>
+                        <span class="fw-normal">{{caçifo.codename}}</span>
+                    </td>
+                    <td><span class="fw-normal">{{caçifo.descrição}}</span></td>
+                    <td><span class="fw-normal">{{caçifo.secção}}</span></td>
+                    <td><span class="fw-normal">{{caçifo.criado}}</span></td>
+                    <td><span class="fw-normal">{{caçifo.atualizado}}</span></td>
+                    <td><span class="fw-normal">{{caçifo.usuario}}</span></td>
+                    <td><span class="fw-normal">{{caçifo.modificador}}</span></td>
+                    
+                    <td>
+                        <div style="display: inline-flex;">
+                            <a class="text-secondary" href="{% url 'sistema:caçifo-detail' caçifo.id %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+                                    fill="currentColor" class="bi bi-eye" viewBox="0 0 20 20">
+                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173
+                                     8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12
+                                    0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 
+                                    8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 
+                                    11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 
+                                    13.134 0 0 1 1.172 8z"/>
+                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0
+                                     1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                  </svg>
+                            </a>
+                        </div>
+                        <div style="display: inline-flex;">
+                            <a class="text-primary" href="{% url 'sistema:atualizar-caçifo' caçifo.id %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 20 20">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5
+                                     0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 
+                                     0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 
+                                     .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5
+                                     0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 
+                                     1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div style="display: inline-flex;">
+                            <a class="text-danger" href="{% url 'sistema:delete-caçifo' caçifo.id %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+                                fill="currentColor" class="bi bi-trash" viewBox="0 0 20 20">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5
+                                     0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0
+                                      1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 
+                                    1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 
+                                    0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5
+                                     3V2h11v1h-11z"/>
+                                </svg>
+                            </a>
+                        </div> 
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <td colspan="8" style="text-align: center;"><span class="fw-normal text-warning">Nenhum registo encontrado! </span></td>
+                {% endif %}
+                
+            </tbody>
+        </table>
+        <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row
+            align-items-center justify-content-between">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mb-0">
+                    {% if caçifos.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ caçifos.previous_page_number }}" 
+                        tabindex="-1">‹</a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled"><a class="page-link">‹</a></li>
+                    {% endif %}
+    
+                    {% for i in caçifos.paginator.page_range %}
+                      {% if caçifos.number == i %}
+                        <li class="page-item active"><a class="page-link">{{ i }}</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+    
+                    {% if caçifos.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ caçifos.next_page_number }}">›</a>
+                    </li>
+                    {% else %}
+                      <li class="page-item disabled"><a class="page-link">›</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            
+            <div class="fw-normal small mt-4 mt-lg-0">A mostrar <b>{{caçifos.number}}</b> de <b>{{caçifos.paginator.num_pages}}</b>
+                paginas
+            </div>
+        </div>
+    </div>
+{% endblock %}

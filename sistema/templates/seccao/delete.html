@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="h6 modal-title">Confirme a sua ação</h2>
+                <a type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close" href="{% url 'sistema:home' %}"></a>
+            </div>
+            <div class="modal-body">
+                <h3>Tem certeza de que deseja apagar?</h3>
+
+                <p> <b>{{ secção }}</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary">Sim</button>
+                <a type="button" class="btn btn-link text-gray-600 ms-auto"
+                data-bs-dismiss="modal" href="{% url 'sistema:home' %}">Não</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

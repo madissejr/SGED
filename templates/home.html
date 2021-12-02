@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+  Sitema de Gestão Eletronica de Documentos
+{% endblock title %}
+
+{% block content%}
+<div class="container">
+  <div style="float: left; margin: 0; padding: 5px;">
+    <div class="card" style="width: 24rem; margin: 10px;">
+      <h1 class="card-header", style="text-align: center; height: 150px; margin: 15px;
+       padding-top: 55px;">
+        {{docs}}
+      </h1>
+      <div class="card-body">
+        <p class="card-text" style="text-align: center;">Total de Documentos Registados</p>
+      </div>
+    </div>
+  </div>
+  
+  <div style="float: right; margin: 0; padding: 5px;">
+    <div class="card" style="width: 24rem; margin: 10px;">
+      <h1 class="card-header", style="text-align: center; height: 150px; margin: 15px;
+      padding-top: 55px;">{{arquivos}}</h1>
+      <div class="card-body">
+        <p class="card-text" style="text-align: center;">Total Arquivos</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="float: bottom; padding-top: 25%;">
+  <h3 style="text-align: center;">Ultimos documentos</h3>
+</div>
+<div class="card card-body border-0 shadow table-wrapper
+        table-responsive">
+        <table class="table-sm table-hover">
+            <thead>
+                <tr>
+                    <th class="border-gray-200">Nome do documento</th>
+                    <th class="border-gray-200">Ficheiro</th>
+                    <th class="border-gray-200">Arquivo</th>
+                    <th class="border-gray-200">Registado por</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Item -->
+                {% if docss %}
+                {% for do in docss %}
+                <tr>
+                    <td>
+                        <span class="fw-normal">{{do.nome}}</span>
+                    </td>
+                    <td><span class="fw-normal">{{do.file}}</span></td>
+                    <td><span class="fw-normal">{{do.arquivo}}</span></td>
+                    <td><span class="fw-normal">{{do.usuario}}</span></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <td colspan="4" style="text-align: center;"><span class="fw-normal text-warning">Nenhum registo encontrado! </span></td>
+                {% endif %}
+                
+            </tbody>
+        </table>
+      </div>
+
+{% endblock content %}
