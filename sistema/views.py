@@ -125,10 +125,7 @@ def CaçifoCadastrar(request):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.usuario = request.user
-            if not Caçifo.objects.filter(secção = secção).exists():
-                obj.codename = f'{secção.codename}{caçifo + 1}'
-            else:
-                obj.codename = f'{secção.codename}{Caçifo.objects.filter(secção=secção).last().__getattribute__("id")}'
+            obj.codename = f'{secção.codename}{caçifo + 1}-{obj.descrição.replace(" ","").lower()}'
             obj.save()
             return redirect('sistema:caçifo')
     context = {'form': form}
@@ -211,15 +208,13 @@ def ArquivoCadastrar(request):
     if request.method == 'POST':
         form = ArquivoForm(request.POST)
         caçifo = Caçifo.objects.get(id=int(form.data['caçifo']))
-        arquivo = Arquivo.objects.all().filter(caçifo = caçifo).__len__()
+        
         if form.is_valid():
             obj = form.save(commit=False)
             obj.usuario = request.user
-            if not Arquivo.objects.filter(caçifo = caçifo).exists():
-                obj.codename = f'{caçifo.codename}-{arquivo + 1}'
-            else:
-                arquivo = Arquivo.objects.filter(caçifo = caçifo).last().__getattribute__('id')
-                obj.codename = f'{caçifo.codename}-{arquivo + 1}'
+            
+            obj.codename = f'{caçifo.codename}-{obj.descrição}'
+            
             obj.save()
             return redirect('sistema:arquivos')
     context = {'form': form}
